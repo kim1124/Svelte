@@ -19,13 +19,17 @@
 
     <!-- 완료된 일 -->
     <div class="todo-list-fin">
-        {#each finList as todo (todo.id)}
-            <div class="todo-list-item" in:receive="{{key: todo.id}}" out:send="{{key: todo.id}}" animate:flip>
-                <input bind:value={todo.title}>
-                <i class="material-icons" on:click={() => onClickRestartTodo(todo)}>replay</i>
-                <i class="material-icons" on:click={() => onClickDeleteTodo(todo.id)} title="Delete todo">delete</i>
-            </div>
-        {/each}
+        {#if finList.length === 0}
+            <span class="blinking">There is no finished todo.</span>
+        {:else}
+            {#each finList as todo (todo.id)}
+                <div class="todo-list-item" in:receive="{{key: todo.id}}" out:send="{{key: todo.id}}" animate:flip>
+                    <input bind:value={todo.title}>
+                    <i class="material-icons" on:click={() => onClickRestartTodo(todo)}>replay</i>
+                    <i class="material-icons" on:click={() => onClickDeleteTodo(todo.id)} title="Delete todo">delete</i>
+                </div>
+            {/each}
+        {/if}
     </div>
 </div>
 
@@ -163,5 +167,23 @@
 
     .todo-list-item i {
         cursor: pointer;
+    }
+	
+    .blinking{
+        -webkit-animation:blink 1.5s ease-in-out infinite alternate;
+        -moz-animation:blink 1.5s ease-in-out infinite alternate;
+        animation:blink 1.5s ease-in-out infinite alternate;
+    }
+    @-webkit-keyframes blink{
+        0% {opacity:0;}
+        100% {opacity:1;}
+    }
+    @-moz-keyframes blink{
+        0% {opacity:0;}
+        100% {opacity:1;}
+    }
+    @keyframes blink{
+        0% {opacity:0;}
+        100% {opacity:1;}
     }
 </style>
