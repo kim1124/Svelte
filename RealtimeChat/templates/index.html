@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Socket.IO chat</title>
+    <style>
+        @import url('/public/css/common.css') screen;
+    </style>
+  </head>
+  <body>
+    <div class="chat">
+      <h1>Realtime chat with socket.io</h1>
+    
+      <div id="msg_list" class="scrollable"></div>
+
+      <form id="form_send" action="">
+        <input id="input_message" autocomplete="off"/>
+        <button>Send</button>
+      </form>
+    </div>
+
+    <script src="/modules/socket.io-client/dist/socket.io.slim.js"></script>
+    <script type="module" src="/public/js/socketClient.js"></script>
+  </body>
+</html>
